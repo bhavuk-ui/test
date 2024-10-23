@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Sidebar from './Component/Sidebar';
+import MainContent from './Component/MainContent';
+import Catalog from './Component/Catalog';
+import Tools from './Component/Tools';
+import Settings from './Component/Settings';
+import Api from './Component/Api';
+import Help from './Component/Help';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="d-flex main_container_box">
+        <Sidebar />
+        <div className="flex-grow-1">
+          <Routes>
+            <Route path="/" element={<MainContent />} />
+            <Route path="/Catalog" element={<Catalog />} />
+            <Route path="/Tools" element={<Tools />} />
+            <Route path="/Settings" element={<Settings />} />
+            <Route path="/Api" element={<Api />} />
+            <Route path="/Help" element={<Help />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
