@@ -105,7 +105,7 @@ const MainContent = () => {
     return (
         <div className="container-fluid body_color_right">
             <div className="sidebar-container">
-                {isOpen && <div className="backdrop" onClick={toggleSidebar} />} {/* Backdrop */}
+                {isOpen && <div className="backdrop" onClick={toggleSidebar} />} 
                 <div className={`sidebar ${isOpen ? 'open' : 'closed'}`} ref={sidebarRef}>
                     <aside className=" border-end">
                         <div>
