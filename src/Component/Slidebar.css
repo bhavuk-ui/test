@@ -1,0 +1,36 @@
+.Slide_bar_width{
+width: 310px;
+height: 796px;
+padding: 42px 16px 14px 17px;
+gap: 24px;
+background-color: #FFFFFF;
+}
+.logo_images img{
+    width: 201px;
+    height: 49px;
+}
+.logo_images ul{
+    gap: 12px;
+}
+.nav-link{
+    padding: 0px !important;
+    color: #00140E !important;
+    font-size: 16px;
+}
+.nav-icon img{
+    width: 24px;
+    height: 24px;
+}
+.nav-item {
+    display:flex;
+    gap: 12px;
+    width: 272px;
+    height: 48px;
+    align-items: center;
+}
+.nav-icon{
+padding-left: 20px;
+}
+.nav{
+    gap: 12px;
+}
