@@ -1,0 +1,203 @@
+.main_content_list{
+    list-style: none;
+    padding: 0px 16px;
+    width: 128px;
+    font-size: 18px;
+    height: 49px;
+        display: flex;
+        display: flex;
+        justify-content: center;
+    }
+      .parent_div{
+        display: grid;
+        gap: 36px;
+      }
+      .main_content_list a.active-link {
+        font-weight: bold;
+        color: #141263;
+      }
+      .unorder_list .active-link{
+        border-bottom: 2px solid  #141263;
+        border-width: 4px;
+        border-radius: 4px;
+    
+      }
+    .main_content_list a{
+        color: #3A3A3A;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        height: 49px;
+        font-size: 16px;
+    }
+    .unorder_list{
+        height: 49px;
+        margin-bottom: 0px;
+        padding-left: 0px;
+    }
+    .nav_height{
+        height: 90px;
+        padding-top: 42px;
+    }
+    .body_color_right{
+    
+        padding: 0px 36px 0px 0px !important;
+        
+    }
+    .Filters{
+        width: 97px;
+        height: 47px;
+        border: 1px solid #141263;
+        color:#141263 ;
+        border-radius: 8px;    
+        background-color: transparent;
+        font-weight: bold;
+        font-size: 16px;
+    
+    }
+    .sidebar-container {
+        position: relative;
+    }
+    
+    
+    
+    
+    .sidebar.open {
+        right: 0;
+    }
+    
+    .sidebar.closed {
+        right: -512px; 
+    }
+    
+    .backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5); 
+        backdrop-filter: blur(1px); 
+        z-index: 800; 
+    }
+    .filter_bar{
+        
+            display: grid;
+            gap: 20px;
+        
+    }
+    .sidebar {
+        position: fixed;
+        top: 0;
+        right: -512px;      
+        height: 100vh;     
+        width: 512px; 
+        background-color: #FFFFFF; 
+        z-index: 900; 
+        transition: right 0.3s ease; 
+        overflow-y: auto;   
+    }
+    
+    .sidebar.open {
+        right: 0;            
+    }
+    
+    .sidebar.closed {
+        right: -512px;       
+    }
+    
+    
+    .border-end {
+        padding: 32px 62px 32px 32px;
+    
+        max-height: calc(100vh - 32px);
+        overflow-y: auto; 
+    }
+    .slider_content_box{
+        display: grid;
+        gap: 45px;
+    }
+    .button_bar{
+        gap: 20px;
+    }
+    
+    .form-check-box{
+        display: grid;
+        gap: 14px;
+      }
+      .form-check{
+        display: flex !important;
+          gap: 12px;
+      }
+    .filter_apply_btn{
+        background-color: #141263;
+        color: white;
+    }
+    
+    
+    tbody .table_data_row:nth-child(even) {
+        background-color: #E7E7E7 !important; 
+    }
+    tbody .table_data_row:nth-child(odd) {
+        background-color: #E7E7E7 !important; 
+    }
+    .tbody>:not(caption)>*>* {
+        background-color:transparent;
+    }
+    .cross_icon{
+        width: 389px;
+    }
+    .cross_icon .close-btn {
+        cursor: pointer;}
+        .close-btn img{
+            width: 24px;
+            height: 24px;
+        }
+        .table2{
+            display: none;
+        }
+        .form-check-input:checked {
+            background-color: #141263  !important;
+            border-color: #141263 !important;
+        }
+        .table_data_row_selected td{
+            padding: 0px 0px 0px 12px !important;
+        }
+        .table_row_selected th{
+            padding: 0px 0px 0px 12px !important; 
+        }
+        .full_name_selected {
+            width: 219px !important;
+        }
+        .Homepage_Selected{
+            width: 211px !important;
+        }
+        .terms__Selected{
+            width: 280px !important;
+        }
+        .Data_provider_Selected{
+            width: 183px !important;
+        }
+        .modality_selected{
+            width: 172px !important;
+        }
+        .delete{
+height: 40px;
+width: 40px;
+        }
+        .home_page{
+            color: #141263;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .head_check_box td{
+            padding: 16px 8px 8px 8px !important;
+        }
+        .Save_aProject{
+            width: 148px;
+            height: 43px;
+        }
+        .Bill_Material{
+            width: 259px;
+            height: 43px;
+        }
