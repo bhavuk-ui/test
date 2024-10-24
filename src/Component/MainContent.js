@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import './MainContent.css';
-
+import { images } from './images/Imagesholder';
 const dataSources = [
     { id: 1, name: "20 Newsgroups", modality: "Text", provider: "Public", dataAvailability: "Jason Rennie", personalData: "Anonymized", terms: "CC0-1.1", homepage: "Link" },
     { id: 2, name: "2018 Data Science", modality: "Images", provider: "Geated", dataAvailability: "Jason Rennie", personalData: "No Personal Data", terms: "CC0-1.3", homepage: "Link" },
@@ -38,6 +38,8 @@ const MainContent = () => {
             prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
         );
     };
+    //  const table2 = document.getElementsByClassName("table2").style.display = "none";
+    //  tabl
 
     const filteredData = dataSources.filter((data) => {
         return (
@@ -108,9 +110,15 @@ const MainContent = () => {
                 {isOpen && <div className="backdrop" onClick={toggleSidebar} />} 
                 <div className={`sidebar ${isOpen ? 'open' : 'closed'}`} ref={sidebarRef}>
                     <aside className=" border-end">
+                        <div  className='d-flex justify-content-between cross_icon'>
                         <div>
                             <h5>Filters</h5>
                         </div>
+                        <div onClick={toggleSidebar} className="close-btn"> 
+                    <img src={images.Cross}/>
+                </div>
+                        </div>
+                      
                         <div className='slider_content_box'>
                             <div className='filter_bar'>
                                 <div className="Source">
@@ -242,7 +250,7 @@ const MainContent = () => {
                     </div>
                     <button className=" Filters" onClick={toggleSidebar}>Filters</button>
                 </div>
-                <div className='container-fluid'>
+                <div className='container-fluid table1'>
                     <div className='row'>
                         <main className="col-12 p-0">
                             <table className="table table-bordered table-hover">
@@ -266,7 +274,56 @@ const MainContent = () => {
                                 </thead>
                                 <tbody>
                                     {filteredData.map((data) => (
-                                        <tr key={data.id} className='table_data_row'>
+                                        <tr key={data.id} className={`table_data_row`}>
+                                            <td className='head_check_box'>
+                                                <input
+                                                    type="checkbox"
+                                                    checked={selectedItems.includes(data.id)}
+                                                    onChange={() => handleCheckboxChange(data.id)}
+                                                />
+                                            </td>
+                                            <td>{data.name}</td>
+                                            <td>{data.modality}</td>
+                                            <td>{data.provider}</td>
+                                            <td>{data.dataAvailability}</td>
+                                            <td>{data.personalData}</td>
+                                            <td>{data.terms}</td>
+                                            <td className='homepage_Links'><a href="#">{data.homepage}</a></td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <div className="d-flex justify-content-between">
+                                <span>Results per page: 50</span>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+                <div className='container-fluid table2'>
+                    <div className='row'>
+                        <main className="col-12 p-0">
+                            <table className="table table-bordered table-hover">
+                                <thead className="table_color">
+                                    <tr className='table_row'>
+                                        <th className='head_check_box'>
+                                            <input
+                                                type="checkbox"
+                                                onChange={() => setSelectedItems([])}
+                                                checked={selectedItems.length === filteredData.length}
+                                            />
+                                        </th>
+                                        <th className='full_name'>Name</th>
+                                        <th className='modality'>Modality</th>
+                                        <th className='Data_provider'>Data Provider</th>
+                                        <th className='Data_availablity'>Data Availability</th>
+                                        <th className='personal_data'>Personal Data</th>
+                                        <th className='terms'>Terms</th>
+                                        <th className='Homepage'>Homepage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {filteredData.map((data) => (
+                                        <tr key={data.id} className={`table_data_row`}>
                                             <td className='head_check_box'>
                                                 <input
                                                     type="checkbox"

@@ -34,3 +34,13 @@ padding-left: 20px;
 .nav{
     gap: 12px;
 }
+.active-links {
+    background-color: #E8E7EF ;
+    border-radius: 12px;
+    color: #141263;
+    font-weight: bold;
+}
+.dots{
+    height: 8px;
+    width: 8px;
+}

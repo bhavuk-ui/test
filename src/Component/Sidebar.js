@@ -1,66 +1,81 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Slidebar.css';
 import { images } from './images/Imagesholder';
 import { NavLink } from 'react-router-dom';
+
 const Sidebar = () => {
+    const [activeLink, setActiveLink] = useState('/'); 
+    const handleClick = (linkName) => {
+        setActiveLink(linkName);
+    };
+
     return (
-        <div className="d-flex flex-column   Slide_bar_width">
+        <div className="d-flex flex-column Slide_bar_width">
             <div className='logo_images'>
-                <img src={images.Fastcatallogo} />
+                <img src={images.Fastcatallogo} alt="Logo" />
             </div>
             <ul className="nav flex-column">
-                <li className="nav-item ">
-                    <div className='nav-icon'>
-                        <img src={images.Dashboard} />
-                    </div>
-                    <div>
-                        <NavLink to="/"  className="nav-link active">My Project</NavLink>
-                    </div>
-                </li>
-                <li className="nav-item ">
-                    <div className='nav-icon'>
-                        <img src={images.Property} />
-                    </div>
-                    <div>
-                    <NavLink to="/Catalog"  className="nav-link">Catalog</NavLink>
+                <NavLink to="/" className="nav-link" onClick={() => handleClick('/')}>
+                    <li className={`nav-item ${activeLink === '/' ? 'active-links' : ''}`}>
+                        <div className='nav-icon'>
+                            <img src={activeLink === '/' ? images.Dashboardb : images.Dashboard} alt="Dashboard" />
+                        </div>
+                        <div>My Project </div>
+                        <div>{activeLink === '/' && <img className='dots' src={images.Elipsdot} alt="dot" />}</div>
+                    </li>
+                </NavLink>
 
-                    </div>
-                </li>
-                <li className="nav-item ">
-                    <div className='nav-icon'>
-                        <img src={images.Document} />
-                    </div>
-                    <div>
-                    <NavLink to="/Tools"  className="nav-link">Tools</NavLink>
-                    </div>
-                </li>
-                <li className="nav-item ">
-                    <div className='nav-icon'>
-                        <img src={images.Setting} />
-                    </div>
-                    <div>
-                    <NavLink to="/Settings"  className="nav-link">Settings</NavLink>
+                <NavLink to="/Catalog" className="nav-link" onClick={() => handleClick('/Catalog')}>
+                    <li className={`nav-item ${activeLink === '/Catalog' ? 'active-links' : ''}`}>
+                        <div className='nav-icon'>
+                            <img src={activeLink === '/Catalog' ? images.Property : images.Propertyb} alt="Catalog" />
+                        </div>
+                        <div>Catalog </div>
+                        <div>{activeLink === '/Catalog' && <img className='dots' src={images.Elipsdot} alt="dot" />}</div>
+                    </li>
+                </NavLink>
 
-                    </div>
-                </li>
-                <li className="nav-item ">
-                    <div className='nav-icon'>
-                        <img src={images.Line} />
-                    </div>
-                    <div>
-                                        <NavLink to="/Api"  className="nav-link">API</NavLink>
-          </div>
+                <NavLink to="/Tools" className="nav-link" onClick={() => handleClick('/Tools')}>
+                    <li className={`nav-item ${activeLink === '/Tools' ? 'active-links' : ''}`}>
+                        <div className='nav-icon'>
+                            <img src={activeLink === '/Tools' ? images.Documentb : images.Document} alt="Tools" />
+                        </div>
+                        <div>Tools </div>
+                        <div>{activeLink === '/Tools' && <img className='dots' src={images.Elipsdot} alt="dot" />}</div>
+                    </li>
+                </NavLink>
 
-                </li>
-                <li className="nav-item">
-                    <div className='nav-icon'>
-                        <img src={images.Graph} />
-                    </div>
-                    <div>
-                    <NavLink to="/Help"  className="nav-link">Help</NavLink>
-                    </div>
+                <NavLink to="/Settings" className="nav-link" onClick={() => handleClick('/Settings')}>
+                    <li className={`nav-item ${activeLink === '/Settings' ? 'active-links' : ''}`}>
+                        <div className='nav-icon'>
+                            <img src={activeLink === '/Settings' ? images.Settingb : images.Setting} alt="Settings" />
+                        </div>
+                        <div>Settings  </div>
+                        <div>
+                        {activeLink === '/Settings' && <img className='dots' src={images.Elipsdot} alt="dot" />}
+                        </div>
+                    </li>
+                </NavLink>
 
-                </li>
+                <NavLink to="/Api" className="nav-link" onClick={() => handleClick('/Api')}>
+                    <li className={`nav-item ${activeLink === '/Api' ? 'active-links' : ''}`}>
+                        <div className='nav-icon'>
+                            <img src={activeLink === '/Api' ? images.Lineb : images.Line} alt="API" />
+                        </div>
+                        <div>API</div>
+                        <div> {activeLink === '/Api' && <img className='dots' src={images.Elipsdot} alt="dot" />}</div>
+                    </li>
+                </NavLink>
+
+                <NavLink to="/Help" className="nav-link" onClick={() => handleClick('/Help')}>
+                    <li className={`nav-item ${activeLink === '/Help' ? 'active-links' : ''}`}>
+                        <div className='nav-icon'>
+                            <img src={activeLink === '/Help' ? images.Graphb : images.Graph} alt="Help" />
+                        </div>
+                        <div>Help</div>
+                        <div>{activeLink === '/Help' && <img className='dots' src={images.Elipsdot} alt="dot" />}</div>
+                    </li>
+                </NavLink>
             </ul>
         </div>
     );
