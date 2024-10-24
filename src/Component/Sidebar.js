@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Slidebar.css';
 import { images } from './images/Imagesholder';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
-    const [activeLink, setActiveLink] = useState('/'); 
+    const location = useLocation(); 
+    const [activeLink, setActiveLink] = useState('/Catalog'); 
+
+
+    useEffect(() => {
+        const path = location.pathname;
+        if (path !== '/Catalog') {
+            setActiveLink(path); 
+        }
+    }, [location]); 
+
     const handleClick = (linkName) => {
         setActiveLink(linkName);
     };
