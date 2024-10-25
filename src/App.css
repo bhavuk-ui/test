@@ -31,9 +31,9 @@ select {
   gap: 16px;
   display: grid;
 }
-.form-check-label {
+/* .form-check-label {
   margin-left: 5px;
-}
+} */
 .form-check-label{
   font-size: 16px;
   font-weight: 400;
@@ -84,9 +84,9 @@ font-size: 16px;
   display: flex;
     gap: 12px;
 }
-.form-check-label{
+/* .form-check-label{
   margin-top: 3px;
-}
+} */
 .form_check_data{
   display: grid;
   gap: 14px;
@@ -213,9 +213,9 @@ select {
   color: #3A3A3A;
 }
 
-.form-check-label {
+/* .form-check-label {
   margin-left: 5px;
-}
+} */
 .form-check-label{
   font-size: 16px;
   font-weight: 400;
@@ -244,4 +244,6 @@ select {
   font-weight: 400 !important;
   width: 394px !important;
   border: 1px solid #9E9E9E !important;
+  color: #767676 !important
 }
+

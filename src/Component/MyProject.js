@@ -36,7 +36,7 @@ export default function MyProject() {
                 <td>{data.personalData}</td> */}
                 <td>data.terms</td>
                 <td>
-                      <a href='#'>Edit</a>
+                      <a href='#' className='edit_link'>Edit</a>
                     </td>
             </tr>
       

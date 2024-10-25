@@ -113,6 +113,9 @@
         max-height: calc(100vh - 32px);
         overflow-y: auto; 
     }
+    .border-end::-webkit-scrollbar {
+        display: none;
+    }
     .slider_content_box{
         display: grid;
         gap: 45px;
@@ -128,6 +131,7 @@
       .form-check{
         display: flex !important;
           gap: 12px;
+          margin-bottom: 0px !important;
       }
     .filter_apply_btn{
         background-color: #141263;
@@ -143,6 +147,10 @@
     }
     .table {
         --bs-table-bg: transparent !important;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 8px;
+        overflow: hidden;
        
     }
    
