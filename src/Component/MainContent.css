@@ -1,0 +1,30 @@
+.new_project{
+    width: 197px;
+    height: 47px;
+    border: 1px solid #141263;
+    background-color: white;
+    font-size: 16px;
+    font-weight: bold;
+    color: #141263;
+    padding: 0px;
+    border-radius: 8px;
+}
+.myproject-heading h2{
+    font-size: 25px;
+    font-weight: bold;
+    align-content: center;
+    margin: 0px;
+
+}
+.myproject-heading {
+    align-content: center;
+
+}
+.myproject-content{
+    padding-top: 42px;
+}
+.my-project-main-container{
+    padding-right: 36px;
+    display: grid;
+    gap: 36px;
+}

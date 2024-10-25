@@ -29,7 +29,8 @@ const Catalog = () => {
     const [tempFilterTerms, setTempFilterTerms] = useState('');
     const [tempFilterProvider, setTempFilterDataProvider] = useState([]); 
     const [tempFilterPersonalData, setTempFilterPersonalData] = useState([]);
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
     const filteredData = dataSources.filter((data) => {
         return (
             data.name.toLowerCase().includes(filterName.toLowerCase()) && 
@@ -39,6 +40,16 @@ const Catalog = () => {
             (filterPersonalData.length === 0 || filterPersonalData.includes(data.personalData))
         );
     });
+
+    const handleButtonClick = () => {
+        setIsModalOpen(true); 
+    };
+ const handleRowsPerPageChange = (e) => {
+    setRowsPerPage(parseInt(e.target.value, 10));
+  };
+    const handleCloseModal = () => {
+        setIsModalOpen(false); 
+    };
     const handleDelete = (id) => {
       setSelectedItems((prevSelectedItems) => {
           const updatedItems = prevSelectedItems.filter((itemId) => itemId !== id);
@@ -51,6 +62,7 @@ const Catalog = () => {
             prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
         );
     };
+
 
     const handlePersonalDataChange = (value) => {
         setTempFilterPersonalData((prev) =>
@@ -266,7 +278,8 @@ const Catalog = () => {
                     <div className='row'>
                         <main className="col-12 p-0">
                             {activeLink === 'data-source' ? (
-                                <table className="table table-bordered table-hover">
+                                <>
+                                   <table className="table table-bordered table-hover">
                                     <thead className="table_color">
                                         <tr className='table_row'>
                                         <th className='head_check_box'>
@@ -286,7 +299,6 @@ const Catalog = () => {
         checked={selectedItems.length === filteredData.length}
     />
 </th>
-
                                             <th className='full_name'>Full Name</th>
                                             <th className='modality'>Modality</th>
                                             <th className='Data_provider'>Data Provider</th>
@@ -318,6 +330,17 @@ const Catalog = () => {
                                         ))}
                                     </tbody>
                                 </table>
+                                 {/* <div>
+                    <label htmlFor="rowsPerPage">Results per page: </label>
+                    <select id="rowsPerPage" value={rowsPerPage} onChange={handleRowsPerPageChange}>
+                      <option value={5}>5</option>
+                      <option value={10}>10</option>
+                      <option value={20}>20</option>
+                    </select>
+                  </div> */}
+                                </>
+                             
+
                             ) : (
                               <>
                               <table className="table table-bordered table-hover">
@@ -351,10 +374,54 @@ const Catalog = () => {
                                 </table>
                                  <div className="botton_comb d-flex justify-content-end">
                                  <div className='d-flex button_bar'>
-                                     <div><button className=" Filters Save_aProject">Save as Project</button></div>
-                                     <div><button className=" Filters filter_apply_btn Bill_Material">Generate Data Bill of Material</button></div>
+                                 <div>
+                <button className="Filters Save_aProject" onClick={handleButtonClick}>Save as Project</button>
+            </div>                                     <div><button className=" Filters filter_apply_btn Bill_Material">Generate Data Bill of Material</button></div>
                                  </div>
                              </div>
+                             {isModalOpen && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                       <div className='main_box_catalog'>
+                       <div className='Catalog_pop_box'>
+                       <div className='d-flex justify-content-between'>
+                        <div>
+
+                        </div>
+                        <div className='d-flex align-items-center Save_as_project'>
+                        <h5 className='m-0'>Save as a Project</h5>
+                        </div>
+<div>
+<button onClick={handleCloseModal} className='cross_btn p-0'><img src={images.Cross1} /></button>
+</div>
+                        </div>
+                        <div className='input_text_container'>
+                      
+                       <div class="input-wrapper">
+  <label for="first" className='label-inputtext'>Project Name</label>
+  <input type="text" className='input-text' placeholder='Badal.Ai'/>
+                       </div>
+<div class="input-wrapper">
+  
+  <label for="first" className='label-inputtext'>Project discription</label>
+  <input type="text" className='input-text ' placeholder='badal.Ai'/>
+</div>    
+       
+                        </div>
+                       </div>
+                       <div className="botton_comb d-flex justify-content-end">
+                                <div className='d-flex button_bar'>
+                                    <div><button className=" Filters" onClick={cancelFilters}>Cancel</button></div>
+                                    <div><button className=" Filters filter_apply_btn" onClick={applyFilters}>Save</button></div>
+                                </div>
+                            </div>
+                       </div>
+                     
+
+                  
+                    </div>
+                </div>
+            )}
                               </>
                                 
                             )}

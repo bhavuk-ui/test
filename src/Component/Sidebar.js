@@ -25,23 +25,23 @@ const Sidebar = () => {
                 <img src={images.Fastcatallogo} alt="Logo" />
             </div>
             <ul className="nav flex-column">
-                <NavLink to="/" className="nav-link" onClick={() => handleClick('/')}>
-                    <li className={`nav-item ${activeLink === '/' ? 'active-links' : ''}`}>
+                <NavLink to="/Myproject" className="nav-link" onClick={() => handleClick('/Myproject')}>
+                    <li className={`nav-item ${activeLink === '/Myproject' ? 'active-links' : ''}`}>
                         <div className='nav-icon'>
-                            <img src={activeLink === '/' ? images.Dashboardb : images.Dashboard} alt="Dashboard" />
+                            <img src={activeLink === '/Myproject' ? images.Dashboardb : images.Dashboard} alt="Dashboard" />
                         </div>
                         <div>My Project </div>
-                        <div>{activeLink === '/' && <img className='dots' src={images.Elipsdot} alt="dot" />}</div>
+                        <div>{activeLink === '/Myproject' && <img className='dots' src={images.Elipsdot} alt="dot" />}</div>
                     </li>
                 </NavLink>
 
-                <NavLink to="/Catalog" className="nav-link" onClick={() => handleClick('/Catalog')}>
-                    <li className={`nav-item ${activeLink === '/Catalog' ? 'active-links' : ''}`}>
+                <NavLink to="/" className="nav-link" onClick={() => handleClick('/')}>
+                    <li className={`nav-item ${activeLink === '/' ? 'active-links' : ''}`}>
                         <div className='nav-icon'>
-                            <img src={activeLink === '/Catalog' ? images.Property : images.Propertyb} alt="Catalog" />
+                            <img src={activeLink === '/' ? images.Property : images.Propertyb} alt="Catalog" />
                         </div>
                         <div>Catalog </div>
-                        <div>{activeLink === '/Catalog' && <img className='dots' src={images.Elipsdot} alt="dot" />}</div>
+                        <div>{activeLink === '/' && <img className='dots' src={images.Elipsdot} alt="dot" />}</div>
                     </li>
                 </NavLink>
 

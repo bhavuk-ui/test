@@ -13,7 +13,8 @@ import Lineb from './Line_b.png';
 import Documentb from './Document_b.png';
 import Dashboardb from './Dashboard_b.png';
 import Graphb  from './Graph-2_b.png';
-import Delete from './state-layer.png'
+import Delete from './state-layer.png';
+import Cross1 from './Cross1.png';
 export const images = {
     Fastcatallogo,
     Setting,
@@ -30,5 +31,6 @@ export const images = {
     Documentb,
     Dashboardb,
     Graphb,
-    Delete
+    Delete,
+    Cross1
   };

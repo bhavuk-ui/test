@@ -99,10 +99,6 @@ font-size: 16px;
 .table-bordered {
   border: 1px solid #dcdcdc;
 }
-
-/* .table-hover tbody tr:hover {
-  background-color: transparent !important;
-} */
 tbody tr{
   height: 63px;
 }
