@@ -131,7 +131,8 @@ const Catalog = () => {
                 {isOpen && <div className="backdrop" onClick={toggleSidebar} />} 
                 <div className={`sidebar ${isOpen ? 'open' : 'closed'}`} ref={sidebarRef}>
                 <aside className=" border-end">
-                        <div  className='d-flex justify-content-between cross_icon'>
+                    <div className='filter_section'>
+                    <div  className='d-flex justify-content-between cross_icon'>
                         <div>
                             <h5>Filters</h5>
                         </div>
@@ -253,6 +254,8 @@ const Catalog = () => {
                                 </div>
                             </div>
                         </div>
+                        </div>
+                       
                     </aside>
                 </div>
             </div>
