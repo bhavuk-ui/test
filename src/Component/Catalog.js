@@ -411,8 +411,8 @@ const Catalog = () => {
                        </div>
                        <div className="botton_comb d-flex justify-content-end">
                                 <div className='d-flex button_bar'>
-                                    <div><button className=" Filters" onClick={cancelFilters}>Cancel</button></div>
-                                    <div><button className=" Filters filter_apply_btn" onClick={applyFilters}>Save</button></div>
+                                    <div><button className=" Filters" >Cancel</button></div>
+                                    <div><button className=" Filters filter_apply_btn">Save</button></div>
                                 </div>
                             </div>
                        </div>
