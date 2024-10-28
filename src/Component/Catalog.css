@@ -313,6 +313,6 @@ height: 48px;padding-left: 8px
 white-space: nowrap;
     }
   }
-  main{
+  .overflows{
     overflow-x: auto;
   }

@@ -281,7 +281,7 @@ const Catalog = () => {
                     <div className='row'>
                         <main className="col-12 p-0">
                             {activeLink === 'data-source' ? (
-                                <>
+                                <div className='overflows'>
                                    <table className="table table-bordered table-hover">
                                     <thead className="table_color">
                                         <tr className='table_row'>
@@ -341,11 +341,11 @@ const Catalog = () => {
                       <option value={20}>20</option>
                     </select>
                   </div> */}
-                                </>
-                             
+                  
+                                </div>
 
                             ) : (
-                              <>
+                              <div className='overflows'>
                               <table className="table table-bordered table-hover">
                                     <thead className="table_color">
                                         <tr className='table_row table_row_selected'>
@@ -425,7 +425,7 @@ const Catalog = () => {
                     </div>
                 </div>
             )}
-                              </>
+                              </div>
                                 
                             )}
                              {/* <div className="d-flex justify-content-between">
