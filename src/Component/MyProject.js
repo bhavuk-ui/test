@@ -13,7 +13,8 @@ export default function MyProject() {
             </div>
        
       </div>
-   <table className="table table-bordered table-hover">
+      <div className='overflows'>
+      <table className="table table-bordered table-hover">
     <thead className="table_color">
         <tr className='table_row table_row_selected'>
         
@@ -42,6 +43,8 @@ export default function MyProject() {
       
     </tbody>
 </table>
+      </div>
+ 
       </div>
       
     </div>

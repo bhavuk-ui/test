@@ -165,7 +165,11 @@
         width: 389px;
     }
     .cross_icon .close-btn {
-        cursor: pointer;}
+        cursor: pointer;
+    }
+    .cross_icon {
+        width: 389px;
+    }
         .close-btn img{
             width: 24px;
             height: 24px;
@@ -320,5 +324,202 @@ white-space: nowrap;
     .body_color_right {
         padding: 0px 5px 0px 5px !important;
     }
+    .toggle-icon {
+        padding: 16px 0px;
+        left: 16px;}
+        .Save_aProject {
+            width: 131px;
+            height: 43px;
+            font-size: 13px;
+        }
+        .button_bar {
+            gap: 10px;
+        }
+        .Bill_Material {
+            width: 198px;
+            height: 43px;
+            font-size: 13px;
+        }
+        .main_content_list{
+            padding: 0px 16px 0px 0px ;
+        }
 
   }
+
+
+
+
+
+
+
+
+
+
+
+  @media (max-width: 768px) {
+    .modal-content {
+        width: 90% !important;
+        height: auto !important;
+        padding: 24px 16px !important;
+        gap: 16px;
+    }.modal-content .input-text {
+        width: 100%;
+        height: 40px;
+        font-size: 14px;
+        padding-left: 8px;
+    }
+
+    .modal-content .Filters {
+        width: 80px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .modal-content .cross_btn img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .modal-content h5 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95% !important;
+        padding: 16px !important;
+        gap: 12px;
+    }
+
+    .modal-content .input-text {
+        width: 100%;
+        height: 36px;
+        font-size: 13px;
+        padding-left: 8px;
+    }
+
+    .modal-content .Filters {
+        width: 70px;
+        height: 36px;
+        font-size: 12px;
+    }
+
+    .modal-content .cross_btn img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .modal-content h5 {
+        font-size: 16px;
+    }
+}
+@media (max-width: 1024px) {
+    .border-end {
+        padding: 16px 32px;
+    }
+
+    .cross_icon {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .filter_section {
+        gap: 20px;
+    }
+    
+    .slider_content_box {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .border-end {
+        padding: 16px;
+        height: auto;
+    }
+
+    .filter_section {
+        gap: 16px;
+    }
+
+    .slider_content_box {
+        gap: 16px;
+    }
+
+    .cross_icon {
+        width: 100%;
+    }
+
+    .button_bar {
+        gap: 10px;
+    }
+
+    .Filters {
+        width: auto;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .form-check-box {
+        gap: 12px;
+    }
+    
+    .Source label,
+    .Source_check_box label {
+        font-size: 14px;
+    }
+}
+.filter_section {
+    display: grid;
+    gap: 24px;
+}
+@media (max-width: 480px) {
+    .border-end {
+        padding: 12px;
+    }
+
+    .filter_section {
+        gap: 12px;
+    }
+
+    .slider_content_box {
+        gap: 12px;
+    }
+
+    .cross_icon {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .Filters {
+        width: auto;
+        font-size: 12px;
+    }
+
+    .Source label,
+    .Source_check_box label {
+        font-size: 12px;
+        display: flex;
+    align-items: center;
+    }
+
+    .form-check-box {
+        gap: 10px;
+    }
+    
+    .Source input,
+    .Source select {
+        font-size: 12px;
+        padding: 8px;
+    }
+    .form-select {
+
+        width: 264px !important;
+    
+    }
+}
+
+
+

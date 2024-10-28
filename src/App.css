@@ -254,3 +254,15 @@ select {
     gap: 0px;
 }
 }
+@media (max-width: 480px) {
+  .form-select {
+
+      width: 264px !important;
+  
+  }
+  .form-control {
+
+    width: 268px !important;
+   }
+}
+
