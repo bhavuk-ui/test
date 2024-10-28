@@ -316,3 +316,9 @@ white-space: nowrap;
   .overflows{
     overflow-x: auto;
   }
+  @media(max-width: 786px){
+    .body_color_right {
+        padding: 0px 5px 0px 5px !important;
+    }
+
+  }

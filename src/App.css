@@ -247,3 +247,10 @@ select {
   color: #767676 !important
 }
 
+
+@media(max-width: 786px){
+  .main_container_box {
+    display: flex;
+    gap: 0px;
+}
+}
