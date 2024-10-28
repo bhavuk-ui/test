@@ -304,3 +304,15 @@ height: 48px;padding-left: 8px
     display: grid;
     gap: 24px;
   }
+
+  @media (min-width: 280px){
+    thead th{
+        white-space: nowrap ;
+    }
+    .table_data_row td{
+white-space: nowrap;
+    }
+  }
+  main{
+    overflow-x: auto;
+  }
