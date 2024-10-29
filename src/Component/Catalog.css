@@ -55,6 +55,16 @@
         font-size: 16px;
     
     }
+    .Save_aProject{
+        width: 97px;
+        height: 47px;
+        border: 1px solid #141263;
+        color:#141263 ;
+        border-radius: 8px;    
+        background-color: transparent;
+        font-weight: bold;
+        font-size: 16px;
+    }
     .sidebar-container {
         position: relative;
     }
@@ -185,7 +195,7 @@
             padding: 0px 0px 0px 12px !important;
         }
         .table_row_selected th{
-            padding: 0px 0px 0px 12px !important; 
+            padding: 0px .5rem 0px 12px !important; 
         }
         .full_name_selected {
             width: 219px !important;
@@ -221,6 +231,9 @@ width: 40px;
         .Bill_Material{
             width: 259px;
             height: 43px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
         }
 
 
@@ -259,7 +272,7 @@ gap: 24px;
     background-color: transparent;
     border: none;
     position: relative;
-    top: -20px;
+    top: -11px;
     right: -7px;
 }
 .input-wrapper {
@@ -308,7 +321,10 @@ height: 48px;padding-left: 8px
     display: grid;
     gap: 24px;
   }
-
+.overflows{
+    display: grid;
+    gap: 24px;
+}
   @media (min-width: 280px){
     thead th{
         white-space: nowrap ;
@@ -337,7 +353,7 @@ white-space: nowrap;
         }
         .Bill_Material {
             width: 198px;
-            height: 43px;
+            height: 47px;
             font-size: 13px;
         }
         .main_content_list{
@@ -346,15 +362,9 @@ white-space: nowrap;
 
   }
 
-
-
-
-
-
-
-
-
-
+.botton_comb{
+    margin-bottom: 7px;
+}
 
   @media (max-width: 768px) {
     .modal-content {
@@ -376,8 +386,8 @@ white-space: nowrap;
     }
 
     .modal-content .cross_btn img {
-        width: 24px;
-        height: 24px;
+        width: 32px;
+        height: 32px;
     }
 
     .modal-content h5 {
@@ -391,7 +401,17 @@ white-space: nowrap;
         padding: 16px !important;
         gap: 12px;
     }
-
+.Selected_link_text{
+justify-content: start;
+width: auto;
+padding: 0px;
+}
+.Filters{
+    margin-right: 15px;
+}
+.Save_aProject{
+    margin-right: 0px;
+}
     .modal-content .input-text {
         width: 100%;
         height: 36px;
@@ -404,10 +424,14 @@ white-space: nowrap;
         height: 36px;
         font-size: 12px;
     }
-
+.Save_aProject{
+    width: 70px;
+    height: 36px;
+    font-size: 12px;
+}
     .modal-content .cross_btn img {
-        width: 20px;
-        height: 20px;
+        width: 32px;
+        height: 32px;
     }
 
     .modal-content h5 {
@@ -456,11 +480,15 @@ white-space: nowrap;
     }
 
     .Filters {
-        width: auto;
-        height: 40px;
+      width: 97px;;
+        height: 47px;
         font-size: 14px;
     }
-
+.Save_aProject{
+    width: 97px;;
+    height: 47px;
+    font-size: 14px; 
+}
     .form-check-box {
         gap: 12px;
     }
@@ -494,10 +522,13 @@ white-space: nowrap;
     }
 
     .Filters {
-        width: auto;
+    width: 100px;
         font-size: 12px;
     }
-
+    .Save_aProject{
+        width: 100px;
+        font-size: 12px;
+    }
     .Source label,
     .Source_check_box label {
         font-size: 12px;
@@ -519,7 +550,32 @@ white-space: nowrap;
         width: 264px !important;
     
     }
+    .page{
+        padding: 0px 10px;
+    }
 }
 
+   
+ table{
+    margin-bottom: 0px !important;
+ }
+.pages{
+    height: 36px;
+    display: flex;
+    gap: 8px;
+}
+.rowsPerPage{
+    font-size: 14px;
+    height: 36px;
+    align-content: center;
+}
+#rowsPerPage{
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    width: 42px;
+    height: 36px;
+    padding: 8px 0px;
+}
 
 

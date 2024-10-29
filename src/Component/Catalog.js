@@ -11,6 +11,29 @@ const dataSources = [
     { id: 6, name: "20 Newsgroups", modality: "Text", provider: "Geated", dataAvailability: "Jason Rennie", personalData: "Anonymized", terms: "CC0-1.1", homepage: "Link" },
     { id: 7, name: "2018 Data Science", modality: "Images", provider: "Public", dataAvailability: "Jason Rennie", personalData: "No Personal Data", terms: "CC0-1.3", homepage: "Link" },
     { id: 8, name: "20 Newsgroups", modality: "Video", provider: "Public", dataAvailability: "Jason Rennie", personalData: "Personally identifiable", terms: "CC0-1.1", homepage: "Link" },
+    { id: 9, name: "20 Newsgroups", modality: "Text", provider: "Public", dataAvailability: "Jason Rennie", personalData: "Anonymized", terms: "CC0-1.1", homepage: "Link" },
+    { id: 10, name: "2018 Data Science", modality: "Images", provider: "Geated", dataAvailability: "Jason Rennie", personalData: "No Personal Data", terms: "CC0-1.3", homepage: "Link" },
+    { id: 11, name: "20 Newsgroups", modality: "Video", provider: "Public", dataAvailability: "Jason Rennie", personalData: "Personally identifiable", terms: "CC0-1.1", homepage: "Link" },
+    { id: 12, name: "2010 i2b2/VA", modality: "Tabular", provider: "Geated", dataAvailability: "Jason Rennie", personalData: "Anonymized", terms: "CC0-1.4", homepage: "Link" },
+    { id: 13, name: "2018 Data Science", modality: "Audio", provider: "Public", dataAvailability: "Jason Rennie", personalData: "No Personal Data", terms: "CC0-1.0", homepage: "Link" },
+    { id: 14, name: "20 Newsgroups", modality: "Text", provider: "Geated", dataAvailability: "Jason Rennie", personalData: "Anonymized", terms: "CC0-1.1", homepage: "Link" },
+    { id: 15, name: "2018 Data Science", modality: "Images", provider: "Public", dataAvailability: "Jason Rennie", personalData: "No Personal Data", terms: "CC0-1.3", homepage: "Link" },
+    { id: 16, name: "20 Newsgroups", modality: "Video", provider: "Public", dataAvailability: "Jason Rennie", personalData: "Personally identifiable", terms: "CC0-1.1", homepage: "Link" },
+    { id: 17, name: "20 Newsgroups", modality: "Text", provider: "Public", dataAvailability: "Jason Rennie", personalData: "Anonymized", terms: "CC0-1.1", homepage: "Link" },
+    { id: 18, name: "2018 Data Science", modality: "Images", provider: "Geated", dataAvailability: "Jason Rennie", personalData: "No Personal Data", terms: "CC0-1.3", homepage: "Link" },
+    { id: 19, name: "20 Newsgroups", modality: "Video", provider: "Public", dataAvailability: "Jason Rennie", personalData: "Personally identifiable", terms: "CC0-1.1", homepage: "Link" },
+    { id: 20, name: "2010 i2b2/VA", modality: "Tabular", provider: "Geated", dataAvailability: "Jason Rennie", personalData: "Anonymized", terms: "CC0-1.4", homepage: "Link" },
+    { id: 21, name: "2018 Data Science", modality: "Audio", provider: "Public", dataAvailability: "Jason Rennie", personalData: "No Personal Data", terms: "CC0-1.0", homepage: "Link" },
+    { id: 22, name: "20 Newsgroups", modality: "Text", provider: "Geated", dataAvailability: "Jason Rennie", personalData: "Anonymized", terms: "CC0-1.1", homepage: "Link" },
+    { id: 23, name: "2018 Data Science", modality: "Images", provider: "Public", dataAvailability: "Jason Rennie", personalData: "No Personal Data", terms: "CC0-1.3", homepage: "Link" },
+    { id: 24, name: "20 Newsgroups", modality: "Video", provider: "Public", dataAvailability: "Jason Rennie", personalData: "Personally identifiable", terms: "CC0-1.1", homepage: "Link" },
+    { id: 25, name: "2018 Data Science", modality: "Images", provider: "Geated", dataAvailability: "Jason Rennie", personalData: "No Personal Data", terms: "CC0-1.3", homepage: "Link" },
+    { id: 26, name: "20 Newsgroups", modality: "Video", provider: "Public", dataAvailability: "Jason Rennie", personalData: "Personally identifiable", terms: "CC0-1.1", homepage: "Link" },
+    { id: 27, name: "2010 i2b2/VA", modality: "Tabular", provider: "Geated", dataAvailability: "Jason Rennie", personalData: "Anonymized", terms: "CC0-1.4", homepage: "Link" },
+    { id: 28, name: "2018 Data Science", modality: "Audio", provider: "Public", dataAvailability: "Jason Rennie", personalData: "No Personal Data", terms: "CC0-1.0", homepage: "Link" },
+    { id: 29, name: "20 Newsgroups", modality: "Text", provider: "Geated", dataAvailability: "Jason Rennie", personalData: "Anonymized", terms: "CC0-1.1", homepage: "Link" },
+    { id: 30, name: "2018 Data Science", modality: "Images", provider: "Public", dataAvailability: "Jason Rennie", personalData: "No Personal Data", terms: "CC0-1.3", homepage: "Link" },
+
 ];
 
 const Catalog = () => {
@@ -30,7 +53,8 @@ const Catalog = () => {
     const [tempFilterProvider, setTempFilterDataProvider] = useState([]); 
     const [tempFilterPersonalData, setTempFilterPersonalData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [currentPage, setCurrentPage] = useState(1);
     const filteredData = dataSources.filter((data) => {
         return (
             data.name.toLowerCase().includes(filterName.toLowerCase()) && 
@@ -44,9 +68,22 @@ const Catalog = () => {
     const handleButtonClick = () => {
         setIsModalOpen(true); 
     };
- const handleRowsPerPageChange = (e) => {
-    setRowsPerPage(parseInt(e.target.value, 10));
-  };
+
+    const handleRowsPerPageChange = (e) => {
+        setRowsPerPage(parseInt(e.target.value, 10));        
+                // setRowsPerPage(newRowsPerPage);
+        setCurrentPage(1); 
+    };
+
+    const totalPages = Math.ceil(dataSources.length / rowsPerPage);
+
+  
+ 
+    const displayedData = filteredData.slice(
+        (currentPage - 1) * rowsPerPage,
+        currentPage * rowsPerPage
+    );
+
     const handleCloseModal = () => {
         setIsModalOpen(false); 
     };
@@ -268,7 +305,7 @@ const Catalog = () => {
                                    onClick={() => handleClick('data-source')}
                                    className={activeLink === 'data-source' ? 'active-link' : ''}
                                 >Data Source</a></li>
-                            <li className='main_content_list'>
+                            <li className='main_content_list Selected_link_text'>
                                 <a onClick={() => handleClick('selected')}
                                    className={activeLink === 'selected' ? 'active-link' : ''} 
                                    href='#'>Selected</a></li>
@@ -281,7 +318,8 @@ const Catalog = () => {
                     <div className='row'>
                         <main className="col-12 p-0">
                             {activeLink === 'data-source' ? (
-                                <div className='overflows'>
+                                <>
+                                 <div className='overflows'>
                                    <table className="table table-bordered table-hover">
                                     <thead className="table_color">
                                         <tr className='table_row'>
@@ -312,7 +350,7 @@ const Catalog = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {filteredData.map((data) => (
+                                        {displayedData.map((data) => (
                                             <tr key={data.id} className={`table_data_row`}>
                                                 <td className='head_check_box'>
                                                     <input
@@ -333,19 +371,30 @@ const Catalog = () => {
                                         ))}
                                     </tbody>
                                 </table>
-                                 {/* <div>
-                    <label htmlFor="rowsPerPage">Results per page: </label>
-                    <select id="rowsPerPage" value={rowsPerPage} onChange={handleRowsPerPageChange}>
-                      <option value={5}>5</option>
-                      <option value={10}>10</option>
-                      <option value={20}>20</option>
-                    </select>
-                  </div> */}
-                  
-                                </div>
+                        
+            </div>
+            <div className='d-flex justify-content-between page page'>
+                                    <div className='d-flex align-items-center pages' >
+                                    <label htmlFor="rowsPerPage" className='rowsPerPage'>Results per page</label>
+                <select id="rowsPerPage" value={rowsPerPage} onChange={handleRowsPerPageChange}>
+                    <option value={10}>10</option>
+                    <option value={20}>20</option>
+                    <option value={30}>30</option>
+                </select>
+                                    </div>
+               
+                <div className='d-flex align-items-center'>                <span> Page {currentPage} of {totalPages} </span>
+                </div>
+            </div>
+                                </>
+                               
+            
+            
+                              
 
                             ) : (
-                              <div className='overflows'>
+                                <>
+                                 <div className='overflows'>
                               <table className="table table-bordered table-hover">
                                     <thead className="table_color">
                                         <tr className='table_row table_row_selected'>
@@ -375,13 +424,7 @@ const Catalog = () => {
                                         ))}
                                     </tbody>
                                 </table>
-                                 <div className="botton_comb d-flex justify-content-end">
-                                 <div className='d-flex button_bar'>
-                                 <div>
-                <button className="Filters Save_aProject" onClick={handleButtonClick}>Save as Project</button>
-            </div>                                     <div><button className=" Filters filter_apply_btn Bill_Material">Generate Data Bill of Material</button></div>
-                                 </div>
-                             </div>
+                               
                              {isModalOpen && (
                 <div className="modal-overlay">
                     <div className="modal-content">
@@ -402,12 +445,12 @@ const Catalog = () => {
                       
                        <div class="input-wrapper">
   <label for="first" className='label-inputtext'>Project Name</label>
-  <input type="text" className='input-text' placeholder='Badal.Ai'/>
+  <input type="text" className='input-text' placeholder='Badal.Ai' required/>
                        </div>
 <div class="input-wrapper">
   
   <label for="first" className='label-inputtext'>Project discription</label>
-  <input type="text" className='input-text ' placeholder='badal.Ai'/>
+  <input type="text" className='input-text ' placeholder='badal.Ai' required/>
 </div>    
        
                         </div>
@@ -426,11 +469,18 @@ const Catalog = () => {
                 </div>
             )}
                               </div>
+                              <div className="botton_comb d-flex justify-content-end">
+                                 <div className='d-flex button_bar'>
+                                 <div>
+                <button className=" Save_aProject" onClick={handleButtonClick}>Save as Project</button>
+            </div>                                     <div><button className=" filter_apply_btn Bill_Material">Generate Data Bill of Material</button></div>
+                                 </div>
+                             </div>
+                                </>
+                             
                                 
                             )}
-                             {/* <div className="d-flex justify-content-between">
-                                <span>Results per page: 50</span>
-                            </div> */}
+                            
                              
                         </main>
                     </div>
