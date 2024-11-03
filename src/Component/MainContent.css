@@ -1,0 +1,58 @@
+.new_project{
+    width: 197px;
+    height: 47px;
+    border: 1px solid #141263;
+    background-color: white;
+    font-size: 16px;
+    font-weight: bold;
+    color: #141263;
+    padding: 0px;
+    border-radius: 8px;
+}
+.myproject-heading h2{
+    font-size: 25px;
+    font-weight: bold;
+    align-content: center;
+    margin: 0px;
+    padding-left: 16px;
+
+}
+.myproject-heading {
+    align-content: center;
+
+}
+.myproject-content{
+    padding-top: 42px;
+}
+.my-project-main-container{
+    padding-right: 36px;
+    display: grid;
+    gap: 36px;
+}
+.edit_link{
+    color: #141263;
+    font-size: 16px;
+    font-weight: bold;
+text-decoration: none;}
+
+@media(max-width: 786px){
+    .my-project-main-container {
+        padding: 0px 5px 0px 5px;
+     
+    }
+    .myproject-heading h2{
+     
+        padding-left: 0px;
+    
+    }
+.myproject-heading{
+padding-left: 12px;
+}
+}
+@media (max-width: 480px) {
+.new_project {
+    width: 137px;
+    font-size: 14px;
+    margin-right: 15px;
+}
+}
