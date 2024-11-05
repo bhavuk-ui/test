@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './Slidebar.css';
 import { images } from './images/Imagesholder';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import supabase from '../SupabaseAuth/supabaseClient';
 
 const Sidebar = () => {
   const location = useLocation();
   const [activeLink, setActiveLink] = useState('/Catalog');
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const path = location.pathname;
@@ -19,6 +21,14 @@ const Sidebar = () => {
   const handleClick = (linkName) => {
     setActiveLink(linkName);
     setIsOpen(false);
+  };
+
+  const onSignOut = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      navigate('/');
+    }
   };
 
   return (
@@ -188,7 +198,34 @@ const Sidebar = () => {
               </div>
             </li>
           </NavLink>
+          <NavLink
+            to="/Help"
+            className="nav-link"
+            onClick={() => handleClick('/Help')}
+          >
+            <li
+              className={`nav-item ${
+                activeLink === '/Help' ? 'active-links' : ''
+              }`}
+            >
+              <div className="nav-icon">
+                <img
+                  src={activeLink === '/Help' ? images.Graphb : images.Graph}
+                  alt="signput"
+                />
+              </div>
+              <div>Help</div>
+              <div>
+                {activeLink === '/Help' && (
+                  <img className="dots" src={images.Elipsdot} alt="dot" />
+                )}
+              </div>
+            </li>
+          </NavLink>
         </ul>
+        <div className="signout-button">
+          <button className="btn btn-danger" onClick={() => onSignOut()}>Sign Out</button>
+        </div>
       </div>
     </div>
   );

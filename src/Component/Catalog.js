@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import './Catalog.css';
 import { images } from './images/Imagesholder';
-import { catelogListingApi } from './dataSources/Api/catelogApi';
-import { pageCounter } from './helpers';
+import { catelogListingApi } from '../dataSources/Api/catelogApi';
+import { pageCounter } from '../helpers/index';
 import Loader from './shared/loader';
 import CatalogTabs from './catalog/tabs';
 import { FILTER_INITIAL_VALUE } from '../constants/constants';
