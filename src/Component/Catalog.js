@@ -1,9 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
 import './Catalog.css';
 import { images } from './images/Imagesholder';
 import { catelogListingApi } from './dataSources/Api/catelogApi';
 import { pageCounter } from './helpers';
 import Loader from './shared/loader';
+import CatalogTabs from './catalog/tabs';
+import { FILTER_INITIAL_VALUE } from '../constants/constants';
+import CatalogFilter from './catalog/catalogFilter';
 
 const Catalog = () => {
   const [activeLink, setActiveLink] = useState('data-source');
@@ -11,38 +15,19 @@ const Catalog = () => {
     const savedItems = localStorage.getItem('selectedItems');
     return savedItems ? JSON.parse(savedItems) : [];
   });
-  const [filterName, setFilterName] = useState('');
-  const [filterModality, setFilterModality] = useState('');
-  const [filterTerms, setFilterTerms] = useState('');
-  const [filterProvider, setFilterDataProvider] = useState([]);
-  const [filterPersonalData, setFilterPersonalData] = useState([]);
-  const [tempFilterName, setTempFilterName] = useState('');
-  const [tempFilterModality, setTempFilterModality] = useState('');
-  const [tempFilterTerms, setTempFilterTerms] = useState('');
-  const [tempFilterProvider, setTempFilterDataProvider] = useState([]);
-  const [tempFilterPersonalData, setTempFilterPersonalData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [response, setResponse] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const filteredData = response?.filter((data) => {
-    return (
-      data.name.toLowerCase().includes(filterName.toLowerCase()) &&
-      (!filterModality || data.modality === filterModality) &&
-      (!filterTerms || data.usage_terms_type === filterTerms) &&
-      (filterProvider.length === 0 ||
-        filterProvider.includes(data.data_provider)) &&
-      (filterPersonalData.length === 0 ||
-        filterPersonalData.includes(data.personal_data_type))
-    );
-  });
+  const [filterValue, setFilterValue] = useState(FILTER_INITIAL_VALUE);
 
-  const handleButtonClick = () => {
-    setIsModalOpen(true);
-  };
+  const filteredData = response;
+
+  const handleButtonClick = () => setIsModalOpen(true);
 
   const totalPages = Math.ceil(totalCount / rowsPerPage);
 
@@ -60,24 +45,23 @@ const Catalog = () => {
     }
   };
 
-  const goToPage = (pageNumber) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
-  };
-
   const offset = (currentPage - 1) * rowsPerPage;
 
+  const fetchData = async () => {
+    setLoading(true);
+    await catelogListingApi({ limit: rowsPerPage, offset, filterData: filterValue })
+    .then((res) => {
+      if (res) {
+        setResponse(res?.entries);
+        setTotalCount(res?.total_count);
+      }
+    })
+    .finally(() => setLoading(false));
+  }
+
   useEffect(() => {
-    catelogListingApi({ limit: rowsPerPage, offset })
-      .then((res) => {
-        if (res) {
-          setResponse(res?.entries);
-          setTotalCount(res?.total_count);
-        }
-      })
-      .finally(() => setLoading(false));
-  }, [rowsPerPage, currentPage]);
+    fetchData();
+  }, [rowsPerPage, currentPage, filterValue]);
 
   const handleRowsPerPageChange = (e) => {
     setRowsPerPage(parseInt(e.target.value, 10));
@@ -87,23 +71,13 @@ const Catalog = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
   const handleDelete = (id) => {
     setSelectedItems((prevSelectedItems) => {
       const updatedItems = prevSelectedItems.filter((itemId) => itemId !== id);
       localStorage.setItem('selectedItems', JSON.stringify(updatedItems));
       return updatedItems;
     });
-  };
-  const handleDataAvailabilityChange = (value) => {
-    setTempFilterDataProvider((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
-    );
-  };
-
-  const handlePersonalDataChange = (value) => {
-    setTempFilterPersonalData((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
-    );
   };
 
   const handleCheckboxChange = (id) => {
@@ -117,279 +91,22 @@ const Catalog = () => {
     });
   };
 
-  const handleClick = (linkName) => {
-    setActiveLink(linkName);
-  };
-
-  const [isOpen, setIsOpen] = useState(false);
-  const sidebarRef = useRef(null);
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleClickOutside = (event) => {
-    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-      setIsOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen]);
-
-  const applyFilters = () => {
-    setFilterName(tempFilterName);
-    setFilterModality(tempFilterModality);
-    setFilterTerms(tempFilterTerms);
-    setFilterDataProvider(tempFilterProvider);
-    setFilterPersonalData(tempFilterPersonalData);
-    toggleSidebar();
-  };
-
-  const cancelFilters = () => {
-    setTempFilterName('');
-    setTempFilterModality('');
-    setTempFilterTerms('');
-    setTempFilterDataProvider([]);
-    setTempFilterPersonalData([]);
-  };
-
   return (
     <>
       {loading && <Loader />}
       <div className="container-fluid body_color_right">
-        <div className="sidebar-container">
-          {isOpen && <div className="backdrop" onClick={toggleSidebar} />}
-          <div
-            className={`sidebar ${isOpen ? 'open' : 'closed'}`}
-            ref={sidebarRef}
-          >
-            <aside className=" border-end">
-              <div className="filter_section">
-                <div className="d-flex justify-content-between cross_icon">
-                  <div>
-                    <h5>Filters</h5>
-                  </div>
-                  <div onClick={toggleSidebar} className="close-btn">
-                    <img src={images.Cross} />
-                  </div>
-                </div>
-
-                <div className="slider_content_box">
-                  <div className="filter_bar">
-                    <div className="Source">
-                      <label className="form-label">
-                        Search by Data Source Name
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter data source name"
-                        value={tempFilterName}
-                        onChange={(e) => setTempFilterName(e.target.value)}
-                      />
-                    </div>
-
-                    <div className="Source">
-                      <label className="form-label">Filter by Modality</label>
-                      <select
-                        className="form-select"
-                        value={tempFilterModality}
-                        onChange={(e) => setTempFilterModality(e.target.value)}
-                      >
-                        <option value="">Select Modality</option>
-                        <option value="Text">Text</option>
-                        <option value="Images">Images</option>
-                        <option value="Video">Video</option>
-                        <option value="Tabular">Tabular</option>
-                        <option value="Audio">Audio</option>
-                      </select>
-                    </div>
-
-                    <div className="Source">
-                      <label className="form-label">
-                        Filter by Terms (SPDX ID)
-                      </label>
-                      <select
-                        className="form-select"
-                        value={tempFilterTerms}
-                        onChange={(e) => setTempFilterTerms(e.target.value)}
-                      >
-                        <option value="">Select Terms</option>
-                        <option value="CC0-1.0">CC0-1.0</option>
-                        <option value="CC0-1.1">CC0-1.1</option>
-                        <option value="CC0-1.3">CC0-1.3</option>
-                        <option value="CC0-1.4">CC0-1.4</option>
-                      </select>
-                    </div>
-
-                    <div className=" Source_check_box">
-                      <label className="form-label">
-                        Filter by Data Availability
-                      </label>
-                      <div className="form-check-box">
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="dataPublic"
-                            checked={tempFilterProvider.includes('Public')}
-                            onChange={() =>
-                              handleDataAvailabilityChange('Public')
-                            }
-                          />
-                          <label
-                            className="form-check-label"
-                            htmlFor="dataPublic"
-                          >
-                            Public
-                          </label>
-                        </div>
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="dataGeated"
-                            checked={tempFilterProvider.includes('Geated')}
-                            onChange={() =>
-                              handleDataAvailabilityChange('Geated')
-                            }
-                          />
-                          <label
-                            className="form-check-label"
-                            htmlFor="dataGeated"
-                          >
-                            Geated
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="Source_check_box">
-                      <label className="form-label">
-                        Filter by Personal Data
-                      </label>
-                      <div className="form_check_data">
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="noPersonalData"
-                            checked={tempFilterPersonalData.includes(
-                              'No Personal Data'
-                            )}
-                            onChange={() =>
-                              handlePersonalDataChange('No Personal Data')
-                            }
-                          />
-                          <label
-                            className="form-check-label"
-                            htmlFor="noPersonalData"
-                          >
-                            No Personal Data
-                          </label>
-                        </div>
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="anonymized"
-                            checked={tempFilterPersonalData.includes(
-                              'Anonymized'
-                            )}
-                            onChange={() =>
-                              handlePersonalDataChange('Anonymized')
-                            }
-                          />
-                          <label
-                            className="form-check-label"
-                            htmlFor="anonymized"
-                          >
-                            Anonymized
-                          </label>
-                        </div>
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="pii"
-                            checked={tempFilterPersonalData.includes(
-                              'Personally identifiable'
-                            )}
-                            onChange={() =>
-                              handlePersonalDataChange(
-                                'Personally identifiable'
-                              )
-                            }
-                          />
-                          <label className="form-check-label" htmlFor="pii">
-                            Personally identifiable
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="botton_comb d-flex justify-content-end">
-                    <div className="d-flex button_bar">
-                      <div>
-                        <button className=" Filters" onClick={cancelFilters}>
-                          Cancel
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          className=" Filters filter_apply_btn"
-                          onClick={applyFilters}
-                        >
-                          Apply
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </aside>
-          </div>
-        </div>
+        <CatalogFilter
+          setCatlogFilterValue={setFilterValue}
+          filterValue={filterValue}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
         <div className="parent_div">
-          <div className="d-flex justify-content-between align-items-center nav_height">
-            <div className="main_content">
-              <ul className="d-flex align-items-center unorder_list">
-                <li className="main_content_list">
-                  <a
-                    href="#"
-                    onClick={() => handleClick('data-source')}
-                    className={
-                      activeLink === 'data-source' ? 'active-link' : ''
-                    }
-                  >
-                    Data Source
-                  </a>
-                </li>
-                <li className="main_content_list Selected_link_text">
-                  <a
-                    onClick={() => handleClick('selected')}
-                    className={activeLink === 'selected' ? 'active-link' : ''}
-                    href="#"
-                  >
-                    Selected
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <button className="Filters" onClick={toggleSidebar}>
-              Filters
-            </button>
-          </div>
+          <CatalogTabs
+            activeLink={activeLink}
+            setActiveLink={setActiveLink}
+            setIsOpen={setIsOpen}
+          />
 
           <div className="container-fluid">
             <div className="row">
